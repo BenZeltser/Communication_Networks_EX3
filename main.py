@@ -16,7 +16,7 @@ while True:
     connectionSocket, addr = serverSocket.accept()  ''' Accept connection by the client'''
     try:
         message =  connectionSocket.recv(1024).decode('utf-8') '''Get a information from the client through the socket and Decode it. 
-                                                                set cap to 8KB per message.'''
+                                                                set cap to 1KB per message.'''
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata =  "OK "
