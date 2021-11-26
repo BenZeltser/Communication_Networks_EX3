@@ -1,22 +1,26 @@
 import socket
 from socket import *
 import sys
-
-host = socket.gethostname() '''Set host name.'''
-port = 6789 '''Set port number.'''
+'''Set host name.'''
+host = socket.gethostname()
+'''Set port number.'''
+port = 6789
 serverSocket = socket(AF_INET, SOCK_STREAM)
 # Prepare a sever socket
 # Fill in start
-serverSocket.bind(socket.gethostname(),port) '''set host IP and Port number for the acceptance socket.'''
-serverSocket.listen(1) ''' get 1 TCP call each time as defined.'''
+'''set host IP and Port number for the acceptance socket.'''
+serverSocket.bind(socket.gethostname(),port)
+''' get 1 TCP call each time as defined.'''
+serverSocket.listen(1)
 # Fill in end
 while True:
     # Establish the connection
     print('Ready to serve...')
-    connectionSocket, addr = serverSocket.accept()  ''' Accept connection by the client'''
+    ''' Accept connection by the client'''
+    connectionSocket, addr = serverSocket.accept()
     try:
-        message =  connectionSocket.recv(1024).decode('utf-8') '''Get a information from the client through the socket and Decode it. 
-                                                                set cap to 8KB per message.'''
+        '''Get a information from the client through the socket and Decode it. set cap to 1KB per message.'''
+        message =  connectionSocket.recv(1024).decode('utf-8')
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata =  "OK "
