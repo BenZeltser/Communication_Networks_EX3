@@ -23,7 +23,7 @@ while True:
         connectionSocket.send(bytes(outputdata, 'utf-8'))
         # Send one HTTP header line into socket
         # Fill in start
-
+        ''' $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'''
         # Fill in end
         # Send the content of the requested file to the client
         for i in range(0, len(outputdata)):
