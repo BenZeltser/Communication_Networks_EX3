@@ -2,7 +2,7 @@ import html
 import socket
 from socket import *
 import sys
-from requests_html import HTML
+from requests_html  import HTML
 '''Set host name.'''
 host = socket.gethostname()
 '''Set port number.'''
@@ -67,6 +67,11 @@ serverSocket.bind(socket.gethostname(),port)
 # Fill in end
 while True:d     # Send one HTTP header line into socket
         # Fill in start
+        with open('HelloWorld.html') as html_file:
+            source = html_file.read()
+            html = HTML(html=source)
+        ans = html.find('h1')
+        connectionSocket.send(bytes(ans, 'utf-8'))
         # Fill in end
         # Send the content of the requested file to the client
         for i in range(0, len(outputdata)):
@@ -77,13 +82,15 @@ while True:d     # Send one HTTP header line into socket
     except IOError:
 # Send response message for file not found
 # Fill in start
-'''Create a text variable, then send the error message with 'utf-8' encoding'''
-text = "Error - Tile not found!"
-connectionSocket.send(bytes(text, "utf-8"))
-connectionSocket.close()
+        '''Create a text variable, then send the error message with 'utf-8' encoding'''
+        text = "Error - Tile not found!"
+        connectionSocket.send(bytes(text, "utf-8"))
+        connectionSocket.close()
+
 # Fill in end
 # Close client socket
 # Fill in start
+connectionSocket.close()
 # Fill in end
 serverSocket.close()
 sys.exit()  # Terminate the program after sending the corresponding
