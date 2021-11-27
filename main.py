@@ -62,6 +62,8 @@ import sys  # In order to terminate the program
 serverSocket = socket(AF_INET, SOCK_STREAM)
 # Prepare a sever socket
 # Fill in start
+'''set host IP and Port number for the acceptance socket.'''
+serverSocket.bind(socket.gethostname(),port)
 # Fill in end
 while True:d     # Send one HTTP header line into socket
         # Fill in start
@@ -75,6 +77,10 @@ while True:d     # Send one HTTP header line into socket
     except IOError:
 # Send response message for file not found
 # Fill in start
+'''Create a text variable, then send the error message with 'utf-8' encoding'''
+text = "Error - Tile not found!"
+connectionSocket.send(bytes(text, "utf-8"))
+connectionSocket.close()
 # Fill in end
 # Close client socket
 # Fill in start
