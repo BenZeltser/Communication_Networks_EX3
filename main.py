@@ -1,17 +1,15 @@
-import html
 import socket
 from socket import *
 import sys
-from requests_html  import HTML
-'''Set host name.'''
-host = socket.gethostname()
-'''Set port number.'''
-port = 6789
 serverSocket = socket(AF_INET, SOCK_STREAM)
 # Prepare a sever socket
 # Fill in start
+'''Set host name.'''
+host=socket.gethostname()
+'''Set port number.'''
+port = 6789
 '''set host IP and Port number for the acceptance socket.'''
-serverSocket.bind(socket.gethostname(),port)
+serverSocket.bind(host,port)
 ''' get 1 TCP call each time as defined.'''
 serverSocket.listen(1)
 # Fill in end
@@ -55,42 +53,3 @@ while True:
     serverSocket.close()
 # Fill in end
     sys.exit()  # Terminate the program after sending the corresponding
-# import socket module
-from socket import *
-import sys  # In order to terminate the program
-
-serverSocket = socket(AF_INET, SOCK_STREAM)
-# Prepare a sever socket
-# Fill in start
-'''set host IP and Port number for the acceptance socket.'''
-serverSocket.bind(socket.gethostname(),port)
-# Fill in end
-while True:d     # Send one HTTP header line into socket
-        # Fill in start
-        with open('HelloWorld.html') as html_file:
-            source = html_file.read()
-            html = HTML(html=source)
-        ans = html.find('h1')
-        connectionSocket.send(bytes(ans, 'utf-8'))
-        # Fill in end
-        # Send the content of the requested file to the client
-        for i in range(0, len(outputdata)):
-            connectionSocket.send(outputdata[i].encode())
-        connectionSocket.send("\r\n".encode())
-
-        connectionSocket.close()
-    except IOError:
-# Send response message for file not found
-# Fill in start
-        '''Create a text variable, then send the error message with 'utf-8' encoding'''
-        text = "Error - Tile not found!"
-        connectionSocket.send(bytes(text, "utf-8"))
-        connectionSocket.close()
-
-# Fill in end
-# Close client socket
-# Fill in start
-connectionSocket.close()
-# Fill in end
-serverSocket.close()
-sys.exit()  # Terminate the program after sending the corresponding
