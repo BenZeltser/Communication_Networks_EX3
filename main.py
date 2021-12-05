@@ -23,7 +23,6 @@ while True:
     try:
         '''Get a information from the client through the socket and Decode it. set cap to 1KB per message.'''
         message = connectionSocket.recv(1024).decode('utf-8')
-        print(message)
         f = open(filename[1:])
         outputdata = connectionSocket.send(bytes(message, 'utf-8'))
         # Send one HTTP header line into socket
