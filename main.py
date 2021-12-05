@@ -1,15 +1,17 @@
 import socket
+import requests_html
+from requests_html import HTML
 from socket import *
 import sys
 serverSocket = socket(AF_INET, SOCK_STREAM)
 # Prepare a sever socket
 # Fill in start
 '''Set host name.'''
-host=socket.gethostname()
+host = gethostname()
 '''Set port number.'''
 port = 6789
 '''set host IP and Port number for the acceptance socket.'''
-serverSocket.bind(host,port)
+serverSocket.bind((host, port))
 ''' get 1 TCP call each time as defined.'''
 serverSocket.listen(1)
 # Fill in end
@@ -20,14 +22,14 @@ while True:
     connectionSocket, addr = serverSocket.accept()
     try:
         '''Get a information from the client through the socket and Decode it. set cap to 1KB per message.'''
-        message =  connectionSocket.recv(1024).decode("utf-8")
+        message = connectionSocket.recv(1024).decode('utf-8')
         filename = message.split()[1]
         f = open(filename[1:])
         outputdata = connectionSocket.send(bytes(message, 'utf-8'))
         # Send one HTTP header line into socket
         # Fill in start
         '''Access the HTML file, and send one header line'''
-        with open ('HelloWorld.html') as html_file:
+        with open('HelloWorld.html') as html_file:
             source = html_file.read()
             html = HTML(html=source)
         ans = html.find('h1')
